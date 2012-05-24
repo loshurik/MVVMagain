@@ -37,7 +37,7 @@
                         <ColumnDefinition Width="40"/>
                     </Grid.ColumnDefinitions>
                     <Views:GameView x:Name="GameView"  Grid.Column="0"/>
-                    <Button  Grid.Column="1" Margin="0" Content=">" Command="{Binding MessageCommand}" />
+                    <Button  Grid.Column="1" Margin="0" Content=">" Command="{Binding NextCommand}" CommandParameter="" />
                 </Grid>
             </StackPanel>
         </Border>

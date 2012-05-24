@@ -2,21 +2,24 @@
 using MVVMagain.Models;
 using MVVMagain.Commands;
 using System.Windows.Input;
+using MVVMagain.Interfaces;
 
 namespace MVVMagain.ViewModels
 {
     public class PlayerViewModel:ViewModelBase
     {
+        private IGame iGame;
         private readonly Player player;
         private ICommand rightAnswerCommand;
 
-        public PlayerViewModel(Player player)
+        public PlayerViewModel(Player player, IGame game)
         {
             if (player == null)
             {
                 throw new NullReferenceException("player");
             }
             this.player = player;
+            iGame = game;
         }
 
         public ICommand RightAnswerCommand
@@ -32,7 +35,7 @@ namespace MVVMagain.ViewModels
 
         private void RightAnswer()
         {
-            this.Score += 10;
+            iGame.IncreaseScore(this);
         }
 
         #region Properties

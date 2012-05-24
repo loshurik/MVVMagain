@@ -34,6 +34,8 @@ namespace MVVMagain
             QuestionsViewModel questionsViewModel = new QuestionsViewModel(questions);
             this.QuestionsView.DataContext = questionsViewModel;
             this.QuestionsOpenView.DataContext = questionsViewModel;
+
+            this.DataContext = gameViewModel;
         }
 
     }
