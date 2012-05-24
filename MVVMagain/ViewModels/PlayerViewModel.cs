@@ -11,6 +11,7 @@ namespace MVVMagain.ViewModels
         private IGame iGame;
         private readonly Player player;
         private ICommand rightAnswerCommand;
+        private ICommand wrongAnswerCommand;
 
         public PlayerViewModel(Player player, IGame game)
         {
@@ -30,12 +31,30 @@ namespace MVVMagain.ViewModels
                     this.rightAnswerCommand = new RelayCommand( ()=>this.RightAnswer());
                 return this.rightAnswerCommand;
             }
-            
         }
 
         private void RightAnswer()
         {
-            iGame.IncreaseScore(this);
+            if (this.State!=false)
+                iGame.IncreaseScore(this);
+        }
+        public ICommand WrongAnswerCommand
+        {
+            get
+            {
+                if (this.wrongAnswerCommand == null)
+                    this.wrongAnswerCommand = new RelayCommand(() => this.WrongAnswer());
+                return this.wrongAnswerCommand;
+            }
+        }
+
+        private void WrongAnswer()
+        {
+            if (this.State != false)
+            {
+                iGame.DecreaseScore(this);
+                this.State = false;
+            }
         }
 
         #region Properties

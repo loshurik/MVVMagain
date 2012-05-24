@@ -62,7 +62,6 @@
     </ApplicationDefinition>
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Interfaces\IGame.cs" />
-    <Compile Include="Interfaces\IPlayer.cs" />
     <Compile Include="Models\BrainSystem.cs" />
     <Compile Include="Models\Questions.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />

@@ -10,5 +10,6 @@ namespace MVVMagain.Interfaces
     public interface IGame
     {
         void IncreaseScore(PlayerViewModel player);
+        void DecreaseScore(PlayerViewModel player);
     }
 }

@@ -135,7 +135,6 @@ namespace MVVMagain.ViewModels
             foreach (PlayerViewModel pvm in this.Players)
             {
                 pvm.State = null;
-                pvm.Score += 100;
             }
         }
 
@@ -148,6 +147,12 @@ namespace MVVMagain.ViewModels
         public void IncreaseScore(PlayerViewModel player)
         {
             player.Score += CurrentQuestion * Game.NominalPoints;
+            Next();
+        }
+
+        public void DecreaseScore(PlayerViewModel player)
+        {
+            player.Score -= CurrentQuestion * Game.NominalPoints;
         }
     }
 }

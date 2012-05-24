@@ -13,6 +13,8 @@
                     <TextBlock HorizontalAlignment="Right" Margin="5" Text="{Binding Score}"/>
                     <Button HorizontalAlignment="Right"  Content="+" 
                             Command="{Binding RightAnswerCommand}"  />
+                    <Button HorizontalAlignment="Right"  Content="-" 
+                            Command="{Binding WrongAnswerCommand}"  />
                 </DockPanel>
             </Border>
         </DataTemplate>
