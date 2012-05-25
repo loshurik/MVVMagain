@@ -12,10 +12,10 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <WrapPanel Grid.Row="0" Grid.ColumnSpan="2">
-            <Button Content="Начать" />
-            <Views:QuestionsOpen x:Name="QuestionsOpenView"/>
-            <Button Content="Настройки"/>
+        <WrapPanel Grid.Row="0" Grid.ColumnSpan="2" Margin="10" >
+            <Button Content="Начать"   Margin="10"/>
+            <Views:QuestionsOpen x:Name="QuestionsOpenView"  Margin="10"/>
+            <Button Content="Настройки"  Margin="10"/>
         </WrapPanel>
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>

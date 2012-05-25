@@ -119,14 +119,14 @@ namespace MVVMagain.ViewModels
 
         private void MoveToNextQuestion()
         {
-            if (CurrentQuestion % 5 == 0)
+            if (CurrentQuestion % 50 == 0)
             {
-                CurrentQuestion = 1;
+                CurrentQuestion = 10;
                 CurrentCategory++;
             }
             else
             {
-                CurrentQuestion++;
+                CurrentQuestion += Game.NominalPoints;
             }
         }
 
@@ -146,13 +146,13 @@ namespace MVVMagain.ViewModels
 
         public void IncreaseScore(PlayerViewModel player)
         {
-            player.Score += CurrentQuestion * Game.NominalPoints;
+            player.Score += CurrentQuestion;
             Next();
         }
 
         public void DecreaseScore(PlayerViewModel player)
         {
-            player.Score -= CurrentQuestion * Game.NominalPoints;
+            player.Score -= CurrentQuestion;
         }
     }
 }

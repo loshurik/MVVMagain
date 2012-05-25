@@ -17,11 +17,11 @@
         <StackPanel Grid.ColumnSpan="2" Grid.RowSpan="2" >
             <DockPanel>
                 <TextBlock Text="Тема " HorizontalAlignment="Right"/>
-                <TextBlock Text="{Binding CurrentCategory}" HorizontalAlignment="Right" />
+                <TextBlock Text="{Binding CurrentCategory}"  />
             </DockPanel>
             <DockPanel>
                 <TextBlock Text="Вопрос за "   HorizontalAlignment="Right"/>
-                <TextBlock Text="{Binding CurrentQuestion}" HorizontalAlignment="Right"/>
+                <TextBlock Text="{Binding CurrentQuestion}" />
             </DockPanel>
         </StackPanel>
         

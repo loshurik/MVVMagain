@@ -25,7 +25,7 @@ namespace MVVMagain.Models
         public Game()
         {
             players = new List<Player>();
-            this.CurrentQuestion = 1;
+            this.CurrentQuestion = Game.NominalPoints;
             this.CurrentCategory = 1;
             for (int i = 0; i < MaximumPlayersCount; i++)
             {

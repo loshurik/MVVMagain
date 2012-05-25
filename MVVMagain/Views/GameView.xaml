@@ -7,16 +7,35 @@
              mc:Ignorable="d" >
     <UserControl.Resources>
         <DataTemplate DataType="{x:Type ViewModels:PlayerViewModel}">
-            <Border Padding="3">
-                <DockPanel>
-                    <TextBlock Margin="5" Text="{Binding Name}"/>
-                    <TextBlock HorizontalAlignment="Right" Margin="5" Text="{Binding Score}"/>
-                    <Button HorizontalAlignment="Right"  Content="+" 
-                            Command="{Binding RightAnswerCommand}"  />
-                    <Button HorizontalAlignment="Right"  Content="-" 
-                            Command="{Binding WrongAnswerCommand}"  />
+            <StackPanel>
+                <DockPanel >
+                    <Button 
+                    DockPanel.Dock="Right"
+                        Width="60"
+                        Content="+" 
+                        Command="{Binding RightAnswerCommand}"  />
+                    
+                    <Button 
+                    DockPanel.Dock="Right"
+                        Width="50"
+                        Content="-"
+                        Command="{Binding WrongAnswerCommand}" />
+
+
+                    <TextBlock 
+                        
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           Text="{Binding Name}" />
+                    <TextBlock 
+                           HorizontalAlignment="Right" 
+                           FontSize="24"
+                           FontWeight="Bold"
+                           Padding="5"
+                           Text="{Binding Score}"/>
+
                 </DockPanel>
-            </Border>
+            </StackPanel>
         </DataTemplate>
     </UserControl.Resources>
     <Grid>
@@ -25,6 +44,13 @@
         </Grid.RowDefinitions>
         <ListBox Grid.Row="0"
                  ItemsSource="{Binding Players}"
-                 IsSynchronizedWithCurrentItem="True"/>
+                 IsSynchronizedWithCurrentItem="True">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="HorizontalContentAlignment"
+                Value="Stretch" />
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
     </Grid>
 </UserControl>
