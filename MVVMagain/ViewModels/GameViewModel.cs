@@ -14,13 +14,12 @@ using MVVMagain.Views;
 
 namespace MVVMagain.ViewModels
 {
-    public class GameViewModel : ViewModelBase, IGame
+    public class GameViewModel : ViewModelBase, IGame, IMemento
     {
         private readonly Game currentGame;
         private readonly ObservableCollection<PlayerViewModel> players;
         private readonly ICollectionView collectionView;
 
-        private ICommand removeCommand;
         private ICommand nextCommand;
         private ICommand startCommand;
         private ICommand validatePlayersCommand;
@@ -100,8 +99,8 @@ namespace MVVMagain.ViewModels
         {
             get
             {
-                if (validatePlayersCommand==null)
-                    validatePlayersCommand = new RelayCommand(()=>this.ValidatePlayers());
+                if (validatePlayersCommand == null)
+                    validatePlayersCommand = new RelayCommand(() => this.ValidatePlayers());
                 return validatePlayersCommand;
             }
         }
@@ -132,37 +131,13 @@ namespace MVVMagain.ViewModels
         }
         #endregion
 
-        #region RemoveCommand
-        public ICommand RemoveCommand
-        {
-            get
-            {
-                if (this.removeCommand == null)
-                    this.removeCommand = new RelayCommand(() => this.RemovePlayer(), () => this.CanRemovePlayer());
-
-                return this.removeCommand;
-            }
-        }
-
-        private bool CanRemovePlayer()
-        {
-            return this.SelectedPlayer != null;
-        }
-
-        private void RemovePlayer()
-        {
-            this.currentGame.RemovePlayer(this.SelectedPlayer.Player);
-            this.players.Remove(this.SelectedPlayer);
-        }
-        #endregion
-
         #region NextCommand
         public ICommand NextCommand
         {
             get
             {
-                if (this.nextCommand==null)
-                    this.nextCommand=new RelayCommand(()=>this.Next());
+                if (this.nextCommand == null)
+                    this.nextCommand = new RelayCommand(() => this.Next());
                 return this.nextCommand;
             }
         }
@@ -199,7 +174,7 @@ namespace MVVMagain.ViewModels
         #region StartCommand
         public ICommand StartCommand
         {
-            get 
+            get
             {
                 if (startCommand == null)
                     startCommand = new RelayCommand(() => this.Start());
@@ -212,14 +187,14 @@ namespace MVVMagain.ViewModels
             //ResetGame();
             StartWindow startWindow = new StartWindow(null);
             startWindow.ShowDialog();
-            
+
         }
 
         private void ResetGame()
         {
             ResetPlayers();
             ResetCategory();
-            
+
         }
 
         private void ResetCategory()
@@ -249,8 +224,21 @@ namespace MVVMagain.ViewModels
         public void DecreaseScore(PlayerViewModel player)
         {
             player.Score -= CurrentQuestion;
+            if (this.players.All(p => p.State == false))
+                Next();
         }
 
+        #endregion
+
+        #region IMemento
+        public Memento SaveMemento()
+        {
+            return new Memento(CurrentQuestion, CurrentCategory, players.ToList(), SelectedPlayer);
+        }
+
+        public void RestoreMemento(Memento memento)
+        {
+        }
         #endregion
     }
 }

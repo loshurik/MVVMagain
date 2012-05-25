@@ -10,7 +10,7 @@ namespace MVVMagain.Models
         #region Constants
         public const int MaximumPlayersCount = 6;
         public const int MinimumPlayersCount = 2;
-        public const int NominalPoints = 10;
+        public const int NominalPoints = 1000;
         public const int QuestionsInCategory = 5;
         #endregion
 
@@ -29,7 +29,7 @@ namespace MVVMagain.Models
             this.CurrentCategory = 1;
             for (int i = 0; i < MaximumPlayersCount; i++)
             {
-                players.Add(new Player());
+                players.Add(new Player() { Name=teams[i]});
                 
             }
         }

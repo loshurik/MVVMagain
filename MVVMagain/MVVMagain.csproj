@@ -63,8 +63,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Infrastructure\Memento.cs" />
+    <Compile Include="Infrastructure\MementoContainer.cs" />
     <Compile Include="Infrastructure\RelayCommand.cs" />
     <Compile Include="Interfaces\IGame.cs" />
+    <Compile Include="Interfaces\IMemento.cs" />
     <Compile Include="Models\BrainSystem.cs" />
     <Compile Include="Models\Questions.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
