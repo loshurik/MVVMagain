@@ -6,9 +6,10 @@ using MVVMagain.Models;
 using Microsoft.Win32;
 using System.IO;
 using System.Windows.Input;
-using MVVMagain.Commands;
+using MVVMagain.Infrastructure;
 using Microsoft.Office.Interop.Word;
 using System.Windows;
+using System.Threading;
 
 namespace MVVMagain.ViewModels
 {

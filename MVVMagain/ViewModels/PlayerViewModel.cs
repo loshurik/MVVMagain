@@ -1,6 +1,6 @@
 ﻿using System;
 using MVVMagain.Models;
-using MVVMagain.Commands;
+using MVVMagain.Infrastructure;
 using System.Windows.Input;
 using MVVMagain.Interfaces;
 

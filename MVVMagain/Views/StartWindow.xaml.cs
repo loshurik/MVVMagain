@@ -11,6 +11,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MVVMagain.Interfaces;
+using MVVMagain.Models;
+using MVVMagain.ViewModels;
 
 
 namespace MVVMagain.Views
@@ -23,6 +25,11 @@ namespace MVVMagain.Views
         public StartWindow(IGame game)
         {
             InitializeComponent();
+            if (game == null)
+            {
+                Game gameModel = new Game();
+                game = new GameViewModel(gameModel);
+            }
             this.DataContext = game;
         }
     }

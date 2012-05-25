@@ -7,7 +7,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Data;
 using System.Windows.Input;
-using MVVMagain.Commands;
+using MVVMagain.Infrastructure;
 using System.Windows;
 using MVVMagain.Interfaces;
 using MVVMagain.Views;
@@ -209,9 +209,10 @@ namespace MVVMagain.ViewModels
 
         private void Start()
         {
-            ResetGame();
-            StartWindow startWindow = new StartWindow(this);
+            //ResetGame();
+            StartWindow startWindow = new StartWindow(null);
             startWindow.ShowDialog();
+            
         }
 
         private void ResetGame()

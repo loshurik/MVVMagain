@@ -29,7 +29,7 @@ namespace MVVMagain.Models
             this.CurrentCategory = 1;
             for (int i = 0; i < MaximumPlayersCount; i++)
             {
-                players.Add(new Player() { Name = teams[i] });
+                players.Add(new Player());
                 
             }
         }
