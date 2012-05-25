@@ -55,7 +55,7 @@ namespace MVVMagain.ViewModels
         private void Open()
         {
             OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "text files (*.txt) | *.txt | Word documents(*.doc,*.docx)| *.doc;*.docx";
+            dialog.Filter = " Word documents(*.doc,*.docx)| *.doc;*.docx | text files (*.txt) | *.txt ";
             if (dialog.ShowDialog() == true)
             {
                 if (dialog.FileName.EndsWith("txt"))
@@ -96,7 +96,7 @@ namespace MVVMagain.ViewModels
             IDataObject data = Clipboard.GetDataObject();
             Text = data.GetData(DataFormats.Text).ToString();
             doc.Close();
-            wordApp.Quit(ref missing, ref missing, ref missing);
+           ((_Application)wordApp).Quit(ref missing, ref missing, ref missing);
         }
     }
 }

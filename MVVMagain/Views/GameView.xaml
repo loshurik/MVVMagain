@@ -12,13 +12,14 @@
                     <Button 
                     DockPanel.Dock="Right"
                         Width="60"
-                        Content="+" 
-                        Command="{Binding RightAnswerCommand}"  />
+                        Command="{Binding RightAnswerCommand}"  >
+                        <ContentPresenter Content="{Binding GameViewModel}"/>
+                    </Button>
                     
                     <Button 
                     DockPanel.Dock="Right"
                         Width="50"
-                        Content="-"
+                        Content="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBox}}, Path=Tag}"
                         Command="{Binding WrongAnswerCommand}" />
 
 

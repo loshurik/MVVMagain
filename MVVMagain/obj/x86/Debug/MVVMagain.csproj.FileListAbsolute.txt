@@ -46,3 +46,5 @@ G:\bsuir\MVVMagain\MVVMagain\obj\x86\Debug\MVVMagain.g.resources
 G:\bsuir\MVVMagain\MVVMagain\obj\x86\Debug\MVVMagain.Properties.Resources.resources
 G:\bsuir\MVVMagain\MVVMagain\obj\x86\Debug\GenerateResource.read.1.tlog
 G:\bsuir\MVVMagain\MVVMagain\obj\x86\Debug\GenerateResource.write.1.tlog
+G:\bsuir\MVVMagain\MVVMagain\obj\x86\Debug\Views\StartWindow.baml
+G:\bsuir\MVVMagain\MVVMagain\obj\x86\Debug\Views\StartWindow.g.cs

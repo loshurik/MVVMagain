@@ -10,6 +10,7 @@ using System.Windows.Input;
 using MVVMagain.Commands;
 using System.Windows;
 using MVVMagain.Interfaces;
+using MVVMagain.Views;
 
 namespace MVVMagain.ViewModels
 {
@@ -18,8 +19,13 @@ namespace MVVMagain.ViewModels
         private readonly Game currentGame;
         private readonly ObservableCollection<PlayerViewModel> players;
         private readonly ICollectionView collectionView;
+
         private ICommand removeCommand;
         private ICommand nextCommand;
+        private ICommand startCommand;
+        private ICommand validatePlayersCommand;
+
+        private string errorMessage;
 
         public GameViewModel(Game game)
         {
@@ -49,6 +55,19 @@ namespace MVVMagain.ViewModels
             get { return this.collectionView.CurrentItem as PlayerViewModel; }
         }
 
+        public string ErrorMessage
+        {
+            get
+            {
+                return this.errorMessage;
+            }
+            set
+            {
+                this.errorMessage = value;
+                OnPropertyChanged("ErrorMessage");
+            }
+        }
+
         public int CurrentQuestion
         {
             get
@@ -73,6 +92,43 @@ namespace MVVMagain.ViewModels
                 this.currentGame.CurrentCategory = value;
                 OnPropertyChanged("CurrentCategory");
             }
+        }
+        #endregion
+
+        #region ValidatePlayersCommand
+        public ICommand ValidatePlayersCommand
+        {
+            get
+            {
+                if (validatePlayersCommand==null)
+                    validatePlayersCommand = new RelayCommand(()=>this.ValidatePlayers());
+                return validatePlayersCommand;
+            }
+        }
+
+        private bool ValidatePlayers()
+        {
+            DeleteUnusedPlayers();
+            return ValidateCount();
+        }
+
+        private void DeleteUnusedPlayers()
+        {
+            for (int i = players.Count - 1; i >= 0; i--)
+            {
+                if (players[i].Name == "")
+                    this.players.RemoveAt(i);
+            }
+        }
+
+        private bool ValidateCount()
+        {
+            if (players.Count < 2)
+            {
+                ErrorMessage = "Мало игроков";
+                return false;
+            }
+            return true;
         }
         #endregion
 
@@ -139,11 +195,50 @@ namespace MVVMagain.ViewModels
         }
 
         #endregion
+
+        #region StartCommand
+        public ICommand StartCommand
+        {
+            get 
+            {
+                if (startCommand == null)
+                    startCommand = new RelayCommand(() => this.Start());
+                return startCommand;
+            }
+        }
+
+        private void Start()
+        {
+            ResetGame();
+            StartWindow startWindow = new StartWindow(this);
+            startWindow.ShowDialog();
+        }
+
+        private void ResetGame()
+        {
+            ResetPlayers();
+            ResetCategory();
+            
+        }
+
+        private void ResetCategory()
+        {
+            CurrentCategory = 1;
+            CurrentQuestion = Game.NominalPoints;
+        }
+
+        private void ResetPlayers()
+        {
+            //???
+        }
+        #endregion
+
         private void OnCollectionViewCurrentChanged(object sender, EventArgs e)
         {
             OnPropertyChanged("SelectedPlayer");
         }
 
+        #region IGame
         public void IncreaseScore(PlayerViewModel player)
         {
             player.Score += CurrentQuestion;
@@ -154,5 +249,7 @@ namespace MVVMagain.ViewModels
         {
             player.Score -= CurrentQuestion;
         }
+
+        #endregion
     }
 }
