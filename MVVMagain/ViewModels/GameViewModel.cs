@@ -16,9 +16,9 @@ namespace MVVMagain.ViewModels
 {
     public class GameViewModel : ViewModelBase, IGame, IMemento
     {
-        private readonly Game currentGame;
-        private readonly ObservableCollection<PlayerViewModel> players;
-        private readonly ICollectionView collectionView;
+        private Game currentGame;
+        private ObservableCollection<PlayerViewModel> players;
+        private ICollectionView collectionView;
 
         private ICommand nextCommand;
         private ICommand startCommand;
@@ -44,6 +44,28 @@ namespace MVVMagain.ViewModels
         }
 
         #region Properties
+
+        public Game CurrentGame
+        {
+            get { return currentGame; }
+            set
+            {
+                currentGame = value;
+                //this.players = new ObservableCollection<PlayerViewModel>();
+
+                //foreach (Player p in this.currentGame.Players)
+                //{
+                //    this.players.Add(new PlayerViewModel(p, this));
+                //}
+
+                //this.collectionView = CollectionViewSource.GetDefaultView(this.players);
+                //if (this.collectionView == null)
+                //    throw new NullReferenceException("collectionView");
+
+                //this.collectionView.CurrentChanged += new EventHandler(this.OnCollectionViewCurrentChanged);
+            }
+        }
+
         public ObservableCollection<PlayerViewModel> Players
         {
             get { return this.players; }
@@ -113,10 +135,13 @@ namespace MVVMagain.ViewModels
 
         private void DeleteUnusedPlayers()
         {
-            for (int i = players.Count - 1; i >= 0; i--)
+            for (int i = currentGame.Players.Count - 1; i >= 0; i--)
             {
-                if (players[i].Name == "")
+                if (currentGame.Players[i].Name == null)
+                {
+                    this.currentGame.Players.RemoveAt(i);
                     this.players.RemoveAt(i);
+                }
             }
         }
 
@@ -150,9 +175,9 @@ namespace MVVMagain.ViewModels
 
         private void MoveToNextQuestion()
         {
-            if (CurrentQuestion % 50 == 0)
+            if (CurrentQuestion % (Game.NominalPoints * Game.QuestionsInCategory) == 0)
             {
-                CurrentQuestion = 10;
+                CurrentQuestion = Game.NominalPoints;
                 CurrentCategory++;
             }
             else
@@ -184,16 +209,15 @@ namespace MVVMagain.ViewModels
 
         private void Start()
         {
-            //ResetGame();
-            StartWindow startWindow = new StartWindow(null);
+            ResetGame();
+            StartWindow startWindow = new StartWindow(this);
             startWindow.ShowDialog();
 
         }
 
         private void ResetGame()
         {
-            ResetPlayers();
-            ResetCategory();
+            this.CurrentGame = new Game();
 
         }
 
@@ -238,6 +262,7 @@ namespace MVVMagain.ViewModels
 
         public void RestoreMemento(Memento memento)
         {
+            //
         }
         #endregion
     }

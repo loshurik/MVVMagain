@@ -25,11 +25,6 @@ namespace MVVMagain.Views
         public StartWindow(IGame game)
         {
             InitializeComponent();
-            if (game == null)
-            {
-                Game gameModel = new Game();
-                game = new GameViewModel(gameModel);
-            }
             this.DataContext = game;
         }
     }

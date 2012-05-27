@@ -56,7 +56,7 @@ namespace MVVMagain.ViewModels
         private void Open()
         {
             OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = " Word documents(*.doc,*.docx)| *.doc;*.docx | text files (*.txt) | *.txt ";
+            dialog.Filter = " *.doc,*.docx, *.txt | *.doc;*.docx; *.txt ";
             if (dialog.ShowDialog() == true)
             {
                 if (dialog.FileName.EndsWith("txt"))

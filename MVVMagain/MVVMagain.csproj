@@ -65,6 +65,7 @@
     </ApplicationDefinition>
     <Compile Include="Infrastructure\Memento.cs" />
     <Compile Include="Infrastructure\MementoContainer.cs" />
+    <Compile Include="Infrastructure\Publisher.cs" />
     <Compile Include="Infrastructure\RelayCommand.cs" />
     <Compile Include="Interfaces\IGame.cs" />
     <Compile Include="Interfaces\IMemento.cs" />
