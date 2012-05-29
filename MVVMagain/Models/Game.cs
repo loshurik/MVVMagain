@@ -14,7 +14,7 @@ namespace MVVMagain.Models
         public const int QuestionsInCategory = 5;
         #endregion
 
-        private readonly List<Player> players;
+        private List<Player> players;
         private string[] teams = { "Страпелька", "Одушевленные Аэросани", "Хронически разумные United", "МИД-2", "Енотики-7", "Боливария" };
         public int CurrentCategory { get; set; }
         public int CurrentQuestion { get; set; }
@@ -29,13 +29,25 @@ namespace MVVMagain.Models
             this.CurrentCategory = 1;
             for (int i = 0; i < MaximumPlayersCount; i++)
             {
-                players.Add(new Player() { });
+                players.Add(new Player() { Name=teams[i] });
                 
             }
         }
         public void RemovePlayer(Player p)
         {
             players.Remove(p);
+        }
+
+        public void Reset()
+        {
+            this.CurrentQuestion = Game.NominalPoints;
+            this.CurrentCategory = 1;
+            this.players = new List<Player>();
+            for (int i = 0; i < MaximumPlayersCount; i++)
+            {
+                players.Add(new Player() { });
+
+            }
         }
     }
 }

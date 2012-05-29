@@ -9,33 +9,39 @@ namespace MVVMagain.Infrastructure
 {
     public class Publisher
     {
-       private static  Dictionary<string, ICommand> container;
-        private static Publisher instance;
+        private static volatile Dictionary<string, IList<object>> container = new Dictionary<string, IList<object>>();
+        private static Publisher instance = new Publisher();
 
         private Publisher()
         {
-            container = new Dictionary<string, ICommand>();
         }
 
-        public Publisher GetInstance()
+        public static Publisher GetInstance()
         {
-            if (instance == null)
-                instance = new Publisher();
-            return instance;
+                return instance;
         }
 
-        public static void Subscribe(string eventName, ICommand command)
+        public static void Subscribe<T>(string eventName, Action<T> action)
         {
-            if(!container.ContainsKey(eventName))
-                container.Add(eventName, command);
+            IList<object> listOfActions;
+            if (!container.TryGetValue(eventName, out listOfActions))
+            {
+                listOfActions = new List<object>();
+                container[eventName] = listOfActions;
+            }
+            listOfActions.Add(action);
         }
 
-        public static ICommand Publish(string eventName, Game game)
+        public static void Publish<T>(string eventName, T iGame)
         {
-            ICommand result;
-            if (container.TryGetValue(eventName, out result))
-                return result;
-            throw new KeyNotFoundException();
+            IList<object> listOfActions;
+            if (container.TryGetValue(eventName, out listOfActions))
+            {
+                foreach (object o in listOfActions)
+                {
+                    (o as Action<T>).Invoke(iGame);
+                }
+            }
         }
     }
 }

@@ -24,8 +24,13 @@ namespace MVVMagain
         public MainWindow()
         {
             InitializeComponent();
-
+            
             Game game = new Game();
+            
+            StartViewModel startViewModel = new StartViewModel(game);
+            startViewModel.CurrentGame = game;
+            this.DataContext = startViewModel;
+
             GameViewModel gameViewModel = new GameViewModel(game);
             this.GameView.DataContext = gameViewModel;
             this.CategoryView.DataContext = gameViewModel;
@@ -35,7 +40,7 @@ namespace MVVMagain
             this.QuestionsView.DataContext = questionsViewModel;
             this.QuestionsOpenView.DataContext = questionsViewModel;
 
-            this.DataContext = gameViewModel;
+           // this.DataContext = gameViewModel;
         }
 
     }

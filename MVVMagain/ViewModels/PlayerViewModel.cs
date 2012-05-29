@@ -104,6 +104,19 @@ namespace MVVMagain.ViewModels
                 OnPropertyChanged("State");
             }
         }
+
+        public IGame CurrentGame
+        {
+            get 
+            {
+                return this.iGame;
+            }
+            set 
+            {
+                this.iGame = value;
+                OnPropertyChanged("CurrentGame");
+            }
+        }
         #endregion
     }
 }

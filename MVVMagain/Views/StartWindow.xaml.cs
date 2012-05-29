@@ -22,7 +22,7 @@ namespace MVVMagain.Views
     /// </summary>
     public partial class StartWindow : Window
     {
-        public StartWindow(IGame game)
+        public StartWindow(object game)
         {
             InitializeComponent();
             this.DataContext = game;
